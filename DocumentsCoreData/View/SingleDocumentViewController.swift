@@ -64,7 +64,7 @@ class SingleDocumentViewController: UIViewController {
             }
         }
         
-        self.navigationController?.popViewController(animated: trues)
+        self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func namedChanged(_ sender: Any) {
