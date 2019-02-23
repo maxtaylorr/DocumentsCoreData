@@ -60,18 +60,12 @@ extension DocumentsViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = documentsTableView.dequeueReusableCell(withIdentifier: "documentCell", for: indexPath)
-        
-        if let cell = cell as? DocumentsTableViewCell {
-            cell.nameLabel.text = documents[indexPath.row].name
-            cell.dataLabel.text = String(documents[indexPath.row].size)
-            cell.dateLabel.text = dateFormatter.string(from: documents[indexPath.row].date!)
-        }
         let document = documents[indexPath.row]
-        cell.textLabel?.text = document.name
-        
-        
-        if let date = document.date {
-            cell.detailTextLabel?.text = dateFormatter.string(from: date)
+
+        if let cell = cell as? DocumentsTableViewCell {
+            cell.nameLabel.text = document.name
+            cell.dataLabel.text = String(document.size)
+            cell.dateLabel.text = dateFormatter.string(from: document.date!)
         }
         
         return cell

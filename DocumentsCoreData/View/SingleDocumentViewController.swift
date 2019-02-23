@@ -29,15 +29,14 @@ class SingleDocumentViewController: UIViewController {
         let bodyText = dataTextField.text
         let size = Int64((bodyText?.lengthOfBytes(using: .utf8))!)
         
-        
         // this seems like such a messy way to set up the date but I couldn't find/think of anything better
         let now = Date()
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = TimeZone.current
         dateFormatter.dateFormat = "MMM d, yyyy at h:mm a"
         let dateString = dateFormatter.string(from: now)
-        guard let newDate = dateFormatter.date(from: dateString) else { return }
-                
+        let newDate = dateFormatter.date(from: dateString)
+        
         var document: Document?
         
         if let existingDocument = existingDocument {
@@ -51,11 +50,9 @@ class SingleDocumentViewController: UIViewController {
             document = Document(name: name, size: size, date: newDate, content: bodyText)
         }
         
-        
         if let document = document {
             do {
                 let managedContext = document.managedObjectContext
-                
                 try managedContext?.save()
                 
                 self.navigationController?.popViewController(animated: true)
@@ -63,8 +60,6 @@ class SingleDocumentViewController: UIViewController {
                 print("Document could not be saved.")
             }
         }
-        
-        self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func namedChanged(_ sender: Any) {
